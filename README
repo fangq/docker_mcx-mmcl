@@ -1,0 +1,13 @@
+In mcximages and mmclimages two folders
+build_image.sh and Dockerfile are used to create image which contains binary
+run_container.sh is used to run a container of the image 
+To run mmcl container, rocm-dkms is required and a GPU support ROCm platform
+To run mcx container, you have to make sure Nvidia driver and Docker 19.03 have been installed. CUDA toolkit is not required. Another toolkit is required on thehost: nvidia-container-toolkit
+Instructions of installation is on https://github.com/NVIDIA/nvidia-docker
+
+Once the mcximage/mmclimage is created, the following commands are used to run mcx/mmcl
+./run_conatiner.sh <param1> <param2> ...
+example:
+./run_container.sh -A -f benchmark1.json -b 0
+./run_container.sh -f cube2.inp -s cube2 -n 1e8 -b 0 -D TP -M G -F bin
+The input files store in the current folder where you store run_container.sh and the output files will be in this folder also
