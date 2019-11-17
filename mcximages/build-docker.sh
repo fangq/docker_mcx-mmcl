@@ -5,7 +5,7 @@
 set -e
 
 # get workflow+container name
-IMAGE_NAME="cuda10-mcx-devel"
+IMAGE_NAME="cuda8-mcx-devel"
 
 # build container
 docker build -f ./Dockerfile . \

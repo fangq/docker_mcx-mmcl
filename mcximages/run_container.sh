@@ -4,7 +4,7 @@
 
 set -e
 
-IMAGE_NAME="cuda10-mcx-devel"
+IMAGE_NAME="cuda8-mcx-devel"
 
 
 
