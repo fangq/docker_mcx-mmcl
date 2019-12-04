@@ -1,0 +1,23 @@
+# uninstall old version
+# older versions of Docker were called docker, docker.io , or docker-engine
+# apt list --installed | grep docker prints out following
+docker.io/xenial-updates,xenial-security,now 18.09.7-0ubuntu1~16.04.5 amd64 [installed]
+nvidia-docker2/xenial,now 2.2.2-1 all [installed]
+sudo apt-get remove docker docker-engine docker.io containerd runc
+# remove nvidia-docker
+sudo apt-get purge nvidia-docker nvidia-container-toolkit
+
+# install docker-ce
+# set up repository https://docs.docker.com/install/linux/docker-ce/ubuntu/
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+# apt-cache policy docker-ce prints out following so it is ready to install version 19.03 docker-ce
+docker-ce:
+  Installed: (none)
+    Candidate: 5:19.03.4~3-0~ubuntu-xenial
+      Version table:
+           5:19.03.4~3-0~ubuntu-xenial 500
+                   500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+# install nvidia-container-toolkit
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
