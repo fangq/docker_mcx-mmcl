@@ -1,11 +1,13 @@
-In mcximages and mmclimages two folders
+There are three folders and each includes similar files
 build_image.sh and Dockerfile are used to create image which contains binary
 run_container.sh is used to run a container of the image 
 To run mmcl container, rocm-dkms is required and a GPU support ROCm platform
 To run mcx container, you have to make sure Nvidia driver and Docker 19.03 have been installed. CUDA toolkit is not required. Another toolkit is required on thehost: nvidia-container-toolkit
 Instructions of the installation of this toolkit is on https://github.com/NVIDIA/nvidia-docker
+You have two choices of mcx images. mcximages foler provides a development environment with source code and recompilability 
+and mcxlight folder just provide binary so the size of the image is small
 
-Once the mcximage/mmclimage is created, the following commands are used to run mcx/mmcl
+Once the mcximage/mmclimage is created or the images are pulled from Docker Hub, the following commands are used to run mcx/mmcl
 ./run_conatiner.sh <param1> <param2> ...
 example:
 ./run_container.sh -A -f benchmark1.json -b 0
