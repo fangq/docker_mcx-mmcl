@@ -1,15 +1,19 @@
-There are three folders and each includes similar files
-build_image.sh and Dockerfile are used to create image which contains binary
+There are four folders and each includes similar files
+build_image.sh and Dockerfile are used to create image
 run_container.sh is used to run a container of the image 
 To run mmcl container, rocm-dkms is required and a GPU support ROCm platform
 To run mcx container, you have to make sure Nvidia driver and Docker 19.03 have been installed. CUDA toolkit is not required. Another toolkit is required on thehost: nvidia-container-toolkit
 Instructions of the installation of this toolkit is on https://github.com/NVIDIA/nvidia-docker
 You have two choices of mcx images. mcximages foler provides a development environment with source code and recompilability 
 and mcxlight folder just provide binary so the size of the image is small
+You can run mcx within Octave using mcxlab docker image. MCXLAB is the native MEX version of MCX for MATLAB and GNU Octave.
+This image is built based on simexp/octave:4.0.0 and nvidia/cuda:9.0-base. You can run this container w/o octave GUI.
 
-Once the mcximage/mmclimage is created or the images are pulled from Docker Hub, the following commands are used to run mcx/mmcl
+Once the mcximage/mmclimage/mcxlabimage is created or the images are pulled from Docker Hub, the following commands are used to run mcx/mmcl
 ./run_conatiner.sh <param1> <param2> ...
 example:
 ./run_container.sh -A -f benchmark1.json -b 0
 ./run_container.sh -f cube2.inp -s cube2 -n 1e8 -b 0 -D TP -M G -F bin
+./run_container.sh
+./run_containergui.sh
 The input files store in the current folder where you store run_container.sh and the output files will be in this folder also
