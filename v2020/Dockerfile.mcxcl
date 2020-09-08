@@ -1,0 +1,14 @@
+FROM nvidia/opencl:runtime-ubuntu16.04
+
+RUN apt-get update
+
+# Install utilities
+RUN apt-get install -y wget zip
+
+# Install from released zip package
+RUN wget http://mcx.space/nightly/release/v2020/mcxcl-linux-x86_64-v2020.zip \
+    -O /mcxcl-linux.zip && unzip /mcxcl-linux.zip -d /
+
+WORKDIR /data
+ENV PATH "${PATH}:/mcxcl/bin:/mcxcl/test:/mcxcl/speedtest"
+CMD [ "mcxcl" ]

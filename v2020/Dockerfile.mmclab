@@ -1,0 +1,22 @@
+FROM nvidia/opencl:runtime-ubuntu16.04
+
+RUN apt-get update
+
+# Install utilities
+RUN apt-get install -y wget zip octave
+
+# Install from released zip package
+RUN wget http://mcx.space/nightly/release/v2020/mmclab-linux-x86_64-v2020.zip -O /mmclab-linux.zip && \
+    unzip /mmclab-linux.zip -d /
+
+RUN wget http://mcx.space/nightly/release/v2020/mmc-linux-x86_64-v2020.zip -O /mmc-linux.zip && \
+    unzip /mmc-linux.zip -d /
+
+RUN echo "\n\
+addpath('/mmclab');\n\
+addpath('/mmc/utils');\n\
+" >> /usr/share/octave/site/m/startup/octaverc
+
+WORKDIR /data
+ENV PATH "${PATH}:/mmc/bin/"
+CMD [ "mmc" ]

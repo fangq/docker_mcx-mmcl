@@ -1,0 +1,31 @@
+FROM nvidia/opencl:runtime-ubuntu16.04
+
+RUN apt-get update
+
+# Development Tools
+RUN apt-get install -y wget zip octave
+
+# Setup some convenient tools/functionalities
+RUN wget http://mcx.space/nightly/release/v2020/MCXStudio-linux64-v2020.zip -O /MCXStudio-linux.zip && \
+    unzip /MCXStudio-linux.zip -d /
+
+RUN wget https://github.com/fangq/iso2mesh/archive/v1.9.6.zip -O /iso2mesh.zip && \
+    unzip /iso2mesh.zip -d /
+
+RUN wget https://github.com/fangq/zmat/releases/download/v0.9.8/zmat-0.9.8-allinone.zip -O /zmat.zip && \
+    unzip /zmat.zip -d /
+
+RUN echo "\n\
+addpath('/zmat');\n\
+addpath('/zmat/octave/linux64');\n\
+addpath('/iso2mesh-1.9.6');\n\
+addpath('/MCXStudio/MATLAB/mcxlab');\n\
+addpath('/MCXStudio/MCXSuite/mcx/utils');\n\
+addpath('/MCXStudio/MATLAB/mmclab');\n\
+addpath('/MCXStudio/MCXSuite/mmc/matlab');\n\
+addpath('/MCXStudio/MATLAB/mcxlabcl');\n\
+" >> /usr/share/octave/site/m/startup/octaverc
+
+WORKDIR /data
+ENV PATH "${PATH}:/MCXStudio:/MCXStudio/MCXSuite/mcx/bin/:/MCXStudio/MCXSuite/mcxcl/bin/:/MCXStudio/MCXSuite/mmc/bin/:/iso2mesh-1.9.6/bin"
+CMD [ "mcx" ]
